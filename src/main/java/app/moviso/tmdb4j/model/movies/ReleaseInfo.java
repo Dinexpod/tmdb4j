@@ -1,0 +1,18 @@
+package app.moviso.tmdb4j.model.movies;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import app.moviso.tmdb4j.model.core.AbstractJsonMapping;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(callSuper = false)
+public class ReleaseInfo extends AbstractJsonMapping {
+    @JsonProperty("iso_3166_1")
+    private String iso31661;
+
+    @JsonProperty("release_dates")
+    private List<ReleaseDate> releaseDates;
+}

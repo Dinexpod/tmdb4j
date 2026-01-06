@@ -1,0 +1,159 @@
+package app.moviso.tmdb4j;
+
+import java.util.HashMap;
+
+import app.moviso.tmdb4j.model.core.responses.ResponseStatus;
+import app.moviso.tmdb4j.model.lists.ListDetails;
+import app.moviso.tmdb4j.model.lists.ListItemStatus;
+import app.moviso.tmdb4j.model.lists.MovieListCreationStatus;
+import app.moviso.tmdb4j.tools.ApiUrl;
+import app.moviso.tmdb4j.tools.RequestType;
+import app.moviso.tmdb4j.tools.TmdbException;
+import app.moviso.tmdb4j.util.JsonUtil;
+
+/**
+ * The movie database api for lists. See the
+ * <a href="https://developer.themoviedb.org/reference/list-add-movie">documentation</a> for more info.
+ */
+public class TmdbLists extends AbstractTmdbApi {
+    protected static final String TMDB_METHOD_LIST = "list";
+
+    /**
+     * Create a new TmdbLists instance to call the lists TMDb API methods.
+     */
+    public TmdbLists(TmdbApi tmdbApi) {
+        super(tmdbApi);
+    }
+
+    /**
+     * <p>Add a movie to a list.</p>
+     * <p>See the <a href="https://developer.themoviedb.org/reference/list-add-movie">documentation</a> for more info.</p>
+     *
+     * @param listId    The list id.
+     * @param sessionId The session id.
+     * @param movieId   The movie id.
+     * @return The response status.
+     * @throws TmdbException If there was an error making the request or mapping the response.
+     */
+    public ResponseStatus addMovie(Integer listId, String sessionId, Integer movieId) throws TmdbException {
+        ApiUrl apiUrl = new ApiUrl(TMDB_METHOD_LIST, listId, "add_item")
+            .addPathParam("session_id", sessionId);
+
+        HashMap<String, Object> body = new HashMap<>();
+        body.put("media_id", movieId);
+
+        String jsonBody = JsonUtil.toJson(body);
+        return mapJsonResult(apiUrl, jsonBody, RequestType.POST, ResponseStatus.class);
+    }
+
+    /**
+     * <p>Use this method to check if an item has already been added to the list.</p>
+     * <p>See the <a href="https://developer.themoviedb.org/reference/list-check-item-status">documentation</a> for more info.</p>
+     *
+     * @param listId   The list id.
+     * @param language nullable - The language to query the results in. Default: en-US.
+     * @param movieId  nullable - The movie id.
+     * @return The list item status.
+     * @throws TmdbException If there was an error making the request or mapping the response.
+     */
+    public ListItemStatus checkItemStatus(Integer listId, String language, Integer movieId) throws TmdbException {
+        ApiUrl apiUrl = new ApiUrl(TMDB_METHOD_LIST, listId, "item_status")
+            .addLanguage(language)
+            .addQueryParam("movie_id", movieId);
+        return mapJsonResult(apiUrl, ListItemStatus.class);
+    }
+
+    /**
+     * <p>Clear all items from a list.</p>
+     * <p>See the <a href="https://developer.themoviedb.org/reference/list-clear">documentation</a> for more info.</p>
+     *
+     * @param listId    The list id.
+     * @param sessionId The session id.
+     * @param confirm   Confirm the clear.
+     * @return The response status.
+     * @throws TmdbException If there was an error making the request or mapping the response.
+     */
+    public ResponseStatus clear(Integer listId, String sessionId, Boolean confirm) throws TmdbException {
+        ApiUrl apiUrl = new ApiUrl(TMDB_METHOD_LIST, listId, "clear")
+            .addPathParam("session_id", sessionId)
+            .addPathParam("confirm", confirm);
+        return mapJsonResult(apiUrl, null, RequestType.POST, ResponseStatus.class);
+    }
+
+    /**
+     * <p>Create a new list.</p>
+     * <p>See the <a href="https://developer.themoviedb.org/reference/list-create">documentation</a> for more info.</p>
+     *
+     * @param sessionId   The session id.
+     * @param name        The name of the list.
+     * @param description The description of the list.
+     * @param language    nullable - The language to query the results in. Default: en-US.
+     * @return The response status.
+     * @throws TmdbException If there was an error making the request or mapping the response.
+     */
+    public MovieListCreationStatus create(String sessionId, String name, String description, String language) throws TmdbException {
+        ApiUrl apiUrl = new ApiUrl(TMDB_METHOD_LIST)
+            .addPathParam("session_id", sessionId);
+
+        HashMap<String, Object> body = new HashMap<>();
+        body.put("name", name);
+        body.put("description", description);
+        body.put("language", language);
+
+        String jsonBody = JsonUtil.toJson(body);
+        return mapJsonResult(apiUrl, jsonBody, RequestType.POST, MovieListCreationStatus.class);
+    }
+
+    /**
+     * <p>Delete a list.</p>
+     * <p>See the <a href="https://developer.themoviedb.org/reference/list-delete">documentation</a> for more info.</p>
+     *
+     * @param listId    The list id.
+     * @param sessionId The session id.
+     * @return The response status.
+     * @throws TmdbException If there was an error making the request or mapping the response.
+     */
+    public ResponseStatus delete(Integer listId, String sessionId) throws TmdbException {
+        ApiUrl apiUrl = new ApiUrl(TMDB_METHOD_LIST, listId)
+            .addPathParam("session_id", sessionId);
+        return mapJsonResult(apiUrl, null, RequestType.DELETE, ResponseStatus.class);
+    }
+
+    /**
+     * <p>Get the details of a list.</p>
+     * <p>See the <a href="https://developer.themoviedb.org/reference/list-details">documentation</a> for more info.</p>
+     *
+     * @param listId   The list id.
+     * @param language nullable - The language to query the results in. Default: en-US.
+     * @param page     nullable - The page of results to return. Default: 1.
+     * @return The movie list.
+     * @throws TmdbException If there was an error making the request or mapping the response.
+     */
+    public ListDetails getDetails(Integer listId, String language, Integer page) throws TmdbException {
+        ApiUrl apiUrl = new ApiUrl(TMDB_METHOD_LIST, listId)
+            .addLanguage(language)
+            .addPage(page);
+        return mapJsonResult(apiUrl, ListDetails.class);
+    }
+
+    /**
+     * <p>Remove a movie from a list.</p>
+     * <p>See the <a href="https://developer.themoviedb.org/reference/list-remove-movie">documentation</a> for more info.</p>
+     *
+     * @param listId    The list id.
+     * @param sessionId The session id.
+     * @param movieId   The movie id.
+     * @return The response status.
+     * @throws TmdbException If there was an error making the request or mapping the response.
+     */
+    public ResponseStatus removeMovie(Integer listId, String sessionId, Integer movieId) throws TmdbException {
+        ApiUrl apiUrl = new ApiUrl(TMDB_METHOD_LIST, listId, "remove_item")
+            .addPathParam("session_id", sessionId);
+
+        HashMap<String, Object> body = new HashMap<>();
+        body.put("media_id", movieId);
+
+        String jsonBody = JsonUtil.toJson(body);
+        return mapJsonResult(apiUrl, jsonBody, RequestType.POST, ResponseStatus.class);
+    }
+}

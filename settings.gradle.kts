@@ -1,2 +1,2 @@
-rootProject.name = "themoviedbapi"
+rootProject.name = "tmdb4j"
 

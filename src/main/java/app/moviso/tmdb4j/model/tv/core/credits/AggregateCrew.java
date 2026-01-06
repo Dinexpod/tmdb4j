@@ -1,0 +1,41 @@
+package app.moviso.tmdb4j.model.tv.core.credits;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import app.moviso.tmdb4j.model.core.NamedIdElement;
+import app.moviso.tmdb4j.model.people.Gender;
+import app.moviso.tmdb4j.model.tv.series.Job;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class AggregateCrew extends NamedIdElement {
+    @JsonProperty("adult")
+    private Boolean adult;
+
+    @JsonProperty("gender")
+    private Gender gender;
+
+    @JsonProperty("known_for_department")
+    private String knownForDepartment;
+
+    @JsonProperty("original_name")
+    private String originalName;
+
+    @JsonProperty("popularity")
+    private Double popularity;
+
+    @JsonProperty("profile_path")
+    private String profilePath;
+
+    @JsonProperty("jobs")
+    private List<Job> jobs;
+
+    @JsonProperty("department")
+    private String department;
+
+    @JsonProperty("total_episode_count")
+    private Integer totalEpisodeCount;
+}

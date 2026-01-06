@@ -1,0 +1,21 @@
+package app.moviso.tmdb4j.model.tv.series;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import app.moviso.tmdb4j.model.core.AbstractJsonMapping;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(callSuper = false)
+public class ContentRating extends AbstractJsonMapping {
+    @JsonProperty("descriptors")
+    private List<Object> descriptors;
+
+    @JsonProperty("iso_3166_1")
+    private String iso31661;
+
+    @JsonProperty("rating")
+    private String rating;
+}

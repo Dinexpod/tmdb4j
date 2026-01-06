@@ -1,0 +1,85 @@
+package app.moviso.tmdb4j;
+
+import java.io.IOException;
+
+import app.moviso.tmdb4j.model.changes.ChangesResultsPage;
+import app.moviso.tmdb4j.testutil.TestUtils;
+import app.moviso.tmdb4j.tools.RequestType;
+import app.moviso.tmdb4j.tools.TmdbException;
+import org.junit.jupiter.api.Test;
+
+import static app.moviso.tmdb4j.TmdbChanges.TMDB_METHOD_CHANGES;
+import static app.moviso.tmdb4j.TmdbChanges.TMDB_METHOD_MOVIE;
+import static app.moviso.tmdb4j.TmdbChanges.TMDB_METHOD_PERSON;
+import static app.moviso.tmdb4j.TmdbChanges.TMDB_METHOD_TV;
+import static app.moviso.tmdb4j.testutil.TestUtils.validateAbstractJsonMappingFields;
+import static app.moviso.tmdb4j.tools.ApiUrl.TMDB_API_BASE_URL;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.when;
+
+/**
+ * Tests for {@link TmdbChanges}.
+ */
+public class TmdbChangesTest extends AbstractTmdbApiTest<TmdbChanges> {
+    @Override
+    public TmdbChanges createApiToTest() {
+        return getTmdbApi().getChanges();
+    }
+
+    /**
+     * Tests the {@link TmdbChanges#getMovieChangesList(String, String, Integer)} with an expected result.
+     */
+    @Test
+    public void testGetMovieChangesList() throws TmdbException, IOException {
+        String startDate = "2023-01-13";
+        String endDate = "2023-01-14";
+        int page = 1;
+
+        String body = TestUtils.readTestFile("api_responses/changes/movie_list.json");
+        String url = TMDB_API_BASE_URL + TMDB_METHOD_MOVIE + "/" + TMDB_METHOD_CHANGES +
+            "?start_date=" + startDate + "&end_date=" + endDate + "&page=" + page;
+        when(getTmdbUrlReader().readUrl(url, null, RequestType.GET)).thenReturn(body);
+
+        ChangesResultsPage changesResultsPage = getApiToTest().getMovieChangesList(startDate, endDate, page);
+        assertNotNull(changesResultsPage);
+        validateAbstractJsonMappingFields(changesResultsPage);
+    }
+
+    /**
+     * Tests the {@link TmdbChanges#getPeopleChangesList(String, String, Integer)} with an expected result.
+     */
+    @Test
+    public void testGetPeopleChangesList() throws TmdbException, IOException {
+        String startDate = "2023-01-13";
+        String endDate = "2023-01-14";
+        int page = 1;
+
+        String body = TestUtils.readTestFile("api_responses/changes/people_list.json");
+        String url = TMDB_API_BASE_URL + TMDB_METHOD_PERSON + "/" + TMDB_METHOD_CHANGES +
+            "?start_date=" + startDate + "&end_date=" + endDate + "&page=" + page;
+        when(getTmdbUrlReader().readUrl(url, null, RequestType.GET)).thenReturn(body);
+
+        ChangesResultsPage changesResultsPage = getApiToTest().getPeopleChangesList(startDate, endDate, page);
+        assertNotNull(changesResultsPage);
+        validateAbstractJsonMappingFields(changesResultsPage);
+    }
+
+    /**
+     * Tests the {@link TmdbChanges#getTvChangesList(String, String, Integer)} with an expected result.
+     */
+    @Test
+    public void testGetTvChangesList() throws TmdbException, IOException {
+        String startDate = "2023-01-13";
+        String endDate = "2023-01-14";
+        int page = 1;
+
+        String body = TestUtils.readTestFile("api_responses/changes/tv_list.json");
+        String url = TMDB_API_BASE_URL + TMDB_METHOD_TV + "/" + TMDB_METHOD_CHANGES +
+            "?start_date=" + startDate + "&end_date=" + endDate + "&page=" + page;
+        when(getTmdbUrlReader().readUrl(url, null, RequestType.GET)).thenReturn(body);
+
+        ChangesResultsPage changesResultsPage = getApiToTest().getTvChangesList(startDate, endDate, page);
+        assertNotNull(changesResultsPage);
+        validateAbstractJsonMappingFields(changesResultsPage);
+    }
+}

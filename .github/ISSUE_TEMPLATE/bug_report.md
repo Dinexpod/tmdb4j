@@ -10,8 +10,8 @@ assignees: ''
 **Describe the bug**
 A clear and concise description of what the bug is.
 
-**State what version of themoviedbapi you are using**
-e.g. 2.3.1.
+**State what version of tmdb4j you are using**
+e.g. 1.0.0.
 
 **Provide a code snippet to replicate the bug**
 code goes here
