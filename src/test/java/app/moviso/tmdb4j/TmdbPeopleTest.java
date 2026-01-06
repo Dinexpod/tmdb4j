@@ -1,34 +1,34 @@
-package info.movito.themoviedbapi;
+package app.moviso.tmdb4j;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import info.movito.themoviedbapi.model.movies.changes.ChangeResults;
-import info.movito.themoviedbapi.model.people.ExternalIds;
-import info.movito.themoviedbapi.model.people.PersonDb;
-import info.movito.themoviedbapi.model.people.PersonImages;
-import info.movito.themoviedbapi.model.people.Translations;
-import info.movito.themoviedbapi.model.people.credits.Cast;
-import info.movito.themoviedbapi.model.people.credits.CombinedPersonCredits;
-import info.movito.themoviedbapi.model.people.credits.Crew;
-import info.movito.themoviedbapi.model.people.credits.MediaType;
-import info.movito.themoviedbapi.model.people.credits.MovieCast;
-import info.movito.themoviedbapi.model.people.credits.MovieCredits;
-import info.movito.themoviedbapi.model.people.credits.MovieCrew;
-import info.movito.themoviedbapi.model.people.credits.TvCast;
-import info.movito.themoviedbapi.model.people.credits.TvCredits;
-import info.movito.themoviedbapi.model.people.credits.TvCrew;
-import info.movito.themoviedbapi.testutil.AbstractJsonMappingValidator;
-import info.movito.themoviedbapi.testutil.TestUtils;
-import info.movito.themoviedbapi.tools.RequestType;
-import info.movito.themoviedbapi.tools.TmdbException;
-import info.movito.themoviedbapi.tools.appendtoresponse.PersonAppendToResponse;
+import app.moviso.tmdb4j.model.movies.changes.ChangeResults;
+import app.moviso.tmdb4j.model.people.ExternalIds;
+import app.moviso.tmdb4j.model.people.PersonDb;
+import app.moviso.tmdb4j.model.people.PersonImages;
+import app.moviso.tmdb4j.model.people.Translations;
+import app.moviso.tmdb4j.model.people.credits.Cast;
+import app.moviso.tmdb4j.model.people.credits.CombinedPersonCredits;
+import app.moviso.tmdb4j.model.people.credits.Crew;
+import app.moviso.tmdb4j.model.people.credits.MediaType;
+import app.moviso.tmdb4j.model.people.credits.MovieCast;
+import app.moviso.tmdb4j.model.people.credits.MovieCredits;
+import app.moviso.tmdb4j.model.people.credits.MovieCrew;
+import app.moviso.tmdb4j.model.people.credits.TvCast;
+import app.moviso.tmdb4j.model.people.credits.TvCredits;
+import app.moviso.tmdb4j.model.people.credits.TvCrew;
+import app.moviso.tmdb4j.testutil.AbstractJsonMappingValidator;
+import app.moviso.tmdb4j.testutil.TestUtils;
+import app.moviso.tmdb4j.tools.RequestType;
+import app.moviso.tmdb4j.tools.TmdbException;
+import app.moviso.tmdb4j.tools.appendtoresponse.PersonAppendToResponse;
 import org.junit.jupiter.api.Test;
 
-import static info.movito.themoviedbapi.TmdbPeople.TMDB_METHOD_PERSON;
-import static info.movito.themoviedbapi.testutil.TestUtils.validateAbstractJsonMappingFields;
-import static info.movito.themoviedbapi.tools.ApiUrl.TMDB_API_BASE_URL;
+import static app.moviso.tmdb4j.TmdbPeople.TMDB_METHOD_PERSON;
+import static app.moviso.tmdb4j.testutil.TestUtils.validateAbstractJsonMappingFields;
+import static app.moviso.tmdb4j.tools.ApiUrl.TMDB_API_BASE_URL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -57,14 +57,14 @@ public class TmdbPeopleTest extends AbstractTmdbApiTest<TmdbPeople> {
 
         AbstractJsonMappingValidator abstractJsonMappingValidator = new AbstractJsonMappingValidator(details);
         List<String> filteredModel = new ArrayList<>();
-        filteredModel.add("info.movito.themoviedbapi.model.people.PersonDb.changes");
-        filteredModel.add("info.movito.themoviedbapi.model.people.PersonDb.combinedCredits");
-        filteredModel.add("info.movito.themoviedbapi.model.people.PersonDb.externalIds");
-        filteredModel.add("info.movito.themoviedbapi.model.people.PersonDb.images");
-        filteredModel.add("info.movito.themoviedbapi.model.people.PersonDb.latest");
-        filteredModel.add("info.movito.themoviedbapi.model.people.PersonDb.movieCredits");
-        filteredModel.add("info.movito.themoviedbapi.model.people.PersonDb.tvCredits");
-        filteredModel.add("info.movito.themoviedbapi.model.people.PersonDb.translations");
+        filteredModel.add("app.moviso.tmdb4j.model.people.PersonDb.changes");
+        filteredModel.add("app.moviso.tmdb4j.model.people.PersonDb.combinedCredits");
+        filteredModel.add("app.moviso.tmdb4j.model.people.PersonDb.externalIds");
+        filteredModel.add("app.moviso.tmdb4j.model.people.PersonDb.images");
+        filteredModel.add("app.moviso.tmdb4j.model.people.PersonDb.latest");
+        filteredModel.add("app.moviso.tmdb4j.model.people.PersonDb.movieCredits");
+        filteredModel.add("app.moviso.tmdb4j.model.people.PersonDb.tvCredits");
+        filteredModel.add("app.moviso.tmdb4j.model.people.PersonDb.translations");
 
         abstractJsonMappingValidator.validateNullFields(filteredModel);
         abstractJsonMappingValidator.validateEmptyCollections();
@@ -185,14 +185,14 @@ public class TmdbPeopleTest extends AbstractTmdbApiTest<TmdbPeople> {
 
         AbstractJsonMappingValidator abstractJsonMappingValidator = new AbstractJsonMappingValidator(latest);
         List<String> filteredModel = new ArrayList<>();
-        filteredModel.add("info.movito.themoviedbapi.model.people.PersonDb.changes");
-        filteredModel.add("info.movito.themoviedbapi.model.people.PersonDb.combinedCredits");
-        filteredModel.add("info.movito.themoviedbapi.model.people.PersonDb.externalIds");
-        filteredModel.add("info.movito.themoviedbapi.model.people.PersonDb.images");
-        filteredModel.add("info.movito.themoviedbapi.model.people.PersonDb.latest");
-        filteredModel.add("info.movito.themoviedbapi.model.people.PersonDb.movieCredits");
-        filteredModel.add("info.movito.themoviedbapi.model.people.PersonDb.tvCredits");
-        filteredModel.add("info.movito.themoviedbapi.model.people.PersonDb.translations");
+        filteredModel.add("app.moviso.tmdb4j.model.people.PersonDb.changes");
+        filteredModel.add("app.moviso.tmdb4j.model.people.PersonDb.combinedCredits");
+        filteredModel.add("app.moviso.tmdb4j.model.people.PersonDb.externalIds");
+        filteredModel.add("app.moviso.tmdb4j.model.people.PersonDb.images");
+        filteredModel.add("app.moviso.tmdb4j.model.people.PersonDb.latest");
+        filteredModel.add("app.moviso.tmdb4j.model.people.PersonDb.movieCredits");
+        filteredModel.add("app.moviso.tmdb4j.model.people.PersonDb.tvCredits");
+        filteredModel.add("app.moviso.tmdb4j.model.people.PersonDb.translations");
 
         abstractJsonMappingValidator.validateNullFields(filteredModel);
         abstractJsonMappingValidator.validateEmptyCollections();

@@ -1,33 +1,33 @@
-package info.movito.themoviedbapi;
+package app.moviso.tmdb4j;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import info.movito.themoviedbapi.model.core.AccountStates;
-import info.movito.themoviedbapi.model.core.responses.ResponseStatus;
-import info.movito.themoviedbapi.model.core.video.VideoResults;
-import info.movito.themoviedbapi.model.tv.core.ChangeResults;
-import info.movito.themoviedbapi.model.tv.core.Translations;
-import info.movito.themoviedbapi.model.tv.episode.EpisodeCredits;
-import info.movito.themoviedbapi.model.tv.episode.ExternalIds;
-import info.movito.themoviedbapi.model.tv.episode.Images;
-import info.movito.themoviedbapi.model.tv.episode.TvEpisodeDb;
-import info.movito.themoviedbapi.testutil.AbstractJsonMappingValidator;
-import info.movito.themoviedbapi.testutil.TestUtils;
-import info.movito.themoviedbapi.tools.RequestType;
-import info.movito.themoviedbapi.tools.TmdbException;
-import info.movito.themoviedbapi.tools.TmdbResponseCode;
-import info.movito.themoviedbapi.tools.appendtoresponse.TvEpisodesAppendToResponse;
-import info.movito.themoviedbapi.util.JsonUtil;
+import app.moviso.tmdb4j.model.core.AccountStates;
+import app.moviso.tmdb4j.model.core.responses.ResponseStatus;
+import app.moviso.tmdb4j.model.core.video.VideoResults;
+import app.moviso.tmdb4j.model.tv.core.ChangeResults;
+import app.moviso.tmdb4j.model.tv.core.Translations;
+import app.moviso.tmdb4j.model.tv.episode.EpisodeCredits;
+import app.moviso.tmdb4j.model.tv.episode.ExternalIds;
+import app.moviso.tmdb4j.model.tv.episode.Images;
+import app.moviso.tmdb4j.model.tv.episode.TvEpisodeDb;
+import app.moviso.tmdb4j.testutil.AbstractJsonMappingValidator;
+import app.moviso.tmdb4j.testutil.TestUtils;
+import app.moviso.tmdb4j.tools.RequestType;
+import app.moviso.tmdb4j.tools.TmdbException;
+import app.moviso.tmdb4j.tools.TmdbResponseCode;
+import app.moviso.tmdb4j.tools.appendtoresponse.TvEpisodesAppendToResponse;
+import app.moviso.tmdb4j.util.JsonUtil;
 import org.junit.jupiter.api.Test;
 
-import static info.movito.themoviedbapi.TmdbTvEpisodes.TMDB_METHOD_TV_EPISODE;
-import static info.movito.themoviedbapi.TmdbTvSeasons.TMDB_METHOD_TV_SEASON;
-import static info.movito.themoviedbapi.TmdbTvSeries.TMDB_METHOD_TV;
-import static info.movito.themoviedbapi.testutil.TestUtils.validateAbstractJsonMappingFields;
-import static info.movito.themoviedbapi.tools.ApiUrl.TMDB_API_BASE_URL;
+import static app.moviso.tmdb4j.TmdbTvEpisodes.TMDB_METHOD_TV_EPISODE;
+import static app.moviso.tmdb4j.TmdbTvSeasons.TMDB_METHOD_TV_SEASON;
+import static app.moviso.tmdb4j.TmdbTvSeries.TMDB_METHOD_TV;
+import static app.moviso.tmdb4j.testutil.TestUtils.validateAbstractJsonMappingFields;
+import static app.moviso.tmdb4j.tools.ApiUrl.TMDB_API_BASE_URL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
@@ -56,12 +56,12 @@ public class TmdbTvEpisodesTest extends AbstractTmdbApiTest<TmdbTvEpisodes> {
 
         AbstractJsonMappingValidator abstractJsonMappingValidator = new AbstractJsonMappingValidator(tvEpisode);
         List<String> filteredModel = new ArrayList<>();
-        filteredModel.add("info.movito.themoviedbapi.model.tv.episode.TvEpisodeDb.accountStates");
-        filteredModel.add("info.movito.themoviedbapi.model.tv.episode.TvEpisodeDb.credits");
-        filteredModel.add("info.movito.themoviedbapi.model.tv.episode.TvEpisodeDb.externalIds");
-        filteredModel.add("info.movito.themoviedbapi.model.tv.episode.TvEpisodeDb.images");
-        filteredModel.add("info.movito.themoviedbapi.model.tv.episode.TvEpisodeDb.translations");
-        filteredModel.add("info.movito.themoviedbapi.model.tv.episode.TvEpisodeDb.videos");
+        filteredModel.add("app.moviso.tmdb4j.model.tv.episode.TvEpisodeDb.accountStates");
+        filteredModel.add("app.moviso.tmdb4j.model.tv.episode.TvEpisodeDb.credits");
+        filteredModel.add("app.moviso.tmdb4j.model.tv.episode.TvEpisodeDb.externalIds");
+        filteredModel.add("app.moviso.tmdb4j.model.tv.episode.TvEpisodeDb.images");
+        filteredModel.add("app.moviso.tmdb4j.model.tv.episode.TvEpisodeDb.translations");
+        filteredModel.add("app.moviso.tmdb4j.model.tv.episode.TvEpisodeDb.videos");
 
         abstractJsonMappingValidator.validateNullFields(filteredModel);
         abstractJsonMappingValidator.validateEmptyCollections();
