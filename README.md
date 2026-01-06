@@ -49,7 +49,7 @@ from within your account settings page.
 There are two types of API keys currently provided by TMDb, please ensure you are using the
 `API Read Access Token` key.
 
-With this you can instantiate `tmdb4j.app.moviso.TmdbApi`, which has getters for all subcategories
+With this you can instantiate `app.moviso.tmdb4j.TmdbApi`, which has getters for all subcategories
 of the API, e.g.
 
 ```java
@@ -150,16 +150,24 @@ project you should add one of the provided [adapter bindings](http://www.slf4j.o
 
 ## ProGuard / R8 rules
 
-Model classes are placed under `app.moviso.tmdb4j.model` package. Add this to `proguard-rules.pro`
-so that, these classes can
-survive minification.
+This library provides built-in ProGuard / R8 rules for Android projects.
 
-```
--keep class app.moviso.tmdb4j.model.** { *; }
-```
+Model classes are located under the `app.moviso.tmdb4j.model` package and rely on
+reflection-based JSON deserialization. To prevent these classes from being removed
+or obfuscated during code shrinking, the required rules are automatically bundled
+with the library.
+
+No additional configuration is required for most Android projects.
 
 ## Notes & Acknowledgements
 
 The library was developed for [Moviso](https://moviso.app) to interact with TMDb services.
 This library has been inspired by [themoviedbapi](https://github.com/c-eg/themoviedbapi) but
-has been rewritten to provide a more clean API, and to expose more features of the TMDb JSON API.
+has been rewritten to provide a cleaner API, and to expose more features of the TMDb JSON API.
+
+## Versioning
+
+TMDb4J follows semantic versioning (SemVer).
+
+Version `1.0.0` marks the first stable release under the new package name
+and artifact coordinates.
