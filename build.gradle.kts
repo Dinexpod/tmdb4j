@@ -6,8 +6,8 @@ plugins {
     id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
 }
 
-group = "uk.co.conoregan"
-version = "2.3.1"
+group = "io.github.dinexpod"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -72,33 +72,32 @@ publishing {
             from(components["java"])
 
             pom {
-                name = "themoviedbapi"
-                description = "A Java-wrapper around the JSON API provided by TMdB, which is an open database for movie and tv content."
-                url = "https://github.com/c-eg/themoviedbapi"
+                name = "tmdb4j"
+                description =
+                    "A Java wrapper around the JSON API provided by The Movie Database (TMDB)"
+                url = "https://github.com/dinexpod/tmdb4j"
 
                 licenses {
                     license {
-                        name = "BSD"
-                        url = "https://github.com/c-eg/themoviedbapi/blob/master/LICENCE.txt"
+                        name = "BSD 2-Clause License"
+                        url = "https://opensource.org/licenses/BSD-2-Clause"
+                        distribution = "repo"
+                        comments = "This library is BSD 2-Clause licensed."
                     }
                 }
 
                 scm {
-                    connection = "scm:git:github.com/c-eg/themoviedbapi.git"
-                    url = "https://github.com/c-eg/themoviedbapi.git"
+                    url = "https://github.com/dinexpod/tmdb4j.git"
+                    connection = "scm:git:https://github.com/dinexpod/tmdb4j.git"
+                    developerConnection = "scm:git:ssh://github.com/dinexpod/tmdb4j.git"
                 }
 
                 developers {
                     developer {
-                        id = "holgerbrandl"
-                        name = "Holger Brandl"
-                        email = "holgerbrandl@gmail.com"
-                    }
-
-                    developer {
-                        id = "c-eg"
-                        name = "Conor Egan"
-                        email = "17conoregan@gmail.com"
+                        id = "dinexpod"
+                        name = "Levitskyi Anatolii"
+                        email = "dinexpod@gmail.com"
+                        url = "https://github.com/dinexpod"
                     }
                 }
             }
@@ -116,7 +115,10 @@ publishing {
     }
 }
 
-if (project.hasProperty("signing.keyId") && project.hasProperty("signing.password") && project.hasProperty("signing.secretKeyRingFile")) signing {
+if (project.hasProperty("signing.keyId") && project.hasProperty("signing.password") && project.hasProperty(
+        "signing.secretKeyRingFile"
+    )
+) signing {
     sign(publishing.publications["mavenJava"])
 }
 
