@@ -3,7 +3,7 @@ plugins {
     checkstyle
     `maven-publish`
     signing
-    id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
+    id("com.gradleup.nmcp") version "0.0.9"
 }
 
 group = "io.github.dinexpod"
@@ -103,22 +103,19 @@ publishing {
             }
         }
     }
-    repositories {
-        maven {
-            name = "OSSRH"
-            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
-            credentials {
-                username = System.getenv("MAVEN_USERNAME")
-                password = System.getenv("MAVEN_PASSWORD")
-            }
-        }
+}
+
+nmcp {
+    publish("mavenJava") {
+        username.set(System.getenv("SONATYPE_USERNAME") ?: project.findProperty("SONATYPE_USERNAME") as String?)
+        password.set(System.getenv("SONATYPE_PASSWORD") ?: project.findProperty("SONATYPE_PASSWORD") as String?)
+
+        publicationType = "USER_MANAGED"
     }
 }
 
-if (project.hasProperty("signing.keyId") && project.hasProperty("signing.password") && project.hasProperty(
-        "signing.secretKeyRingFile"
-    )
-) signing {
+signing {
+    useGpgCmd()
     sign(publishing.publications["mavenJava"])
 }
 
