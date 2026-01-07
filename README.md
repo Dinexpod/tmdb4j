@@ -1,6 +1,6 @@
 # TMDb4J (The Movie Database API)
 
-[![Download](https://img.shields.io/github/v/release/dinexpod/tmdb4j)](https://github.com/dinexpod/tmdb4j/releases)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.dinexpod/tmdb4j.svg?label=Maven%20Central)](https://search.maven.org/artifact/io.github.dinexpod/tmdb4j)
 [![BSD 2 License](http://img.shields.io/badge/license-BSD_2_Clause-green.svg)](https://opensource.org/licenses/BSD-2-Clause)
 
 This library provides a Java-wrapper around
