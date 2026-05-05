@@ -2,13 +2,13 @@ package app.moviso.tmdb4j.model.tv.season;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import app.moviso.tmdb4j.model.core.NamedIdElement;
 import app.moviso.tmdb4j.model.core.video.VideoResults;
 import app.moviso.tmdb4j.model.core.watchproviders.ProviderResults;
 import app.moviso.tmdb4j.model.tv.core.Translations;
 import app.moviso.tmdb4j.model.tv.core.credits.AggregateCredits;
 import app.moviso.tmdb4j.model.tv.core.credits.Credits;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

@@ -2,13 +2,13 @@ package app.moviso.tmdb4j.model.people;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import app.moviso.tmdb4j.model.core.NamedIdElement;
 import app.moviso.tmdb4j.model.movies.changes.ChangeResults;
 import app.moviso.tmdb4j.model.people.credits.CombinedPersonCredits;
 import app.moviso.tmdb4j.model.people.credits.MovieCredits;
 import app.moviso.tmdb4j.model.people.credits.TvCredits;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

@@ -1,14 +1,19 @@
 package app.moviso.tmdb4j.tools;
 
-import app.moviso.tmdb4j.model.core.responses.TmdbResponseException;
-import lombok.AllArgsConstructor;
-import okhttp3.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+
+import app.moviso.tmdb4j.model.core.responses.TmdbResponseException;
+import lombok.AllArgsConstructor;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to make requests to the movie database api.
@@ -56,12 +61,14 @@ public class TmdbHttpClient implements TmdbUrlReader {
 
                 lastException = new TmdbResponseException(buildNonJsonResponseMessage(response, responseBody));
                 break;
-            } catch (IOException exception) {
+            }
+            catch (IOException exception) {
                 lastException = new TmdbResponseException(exception);
                 if (attempt < MAX_ATTEMPTS) {
                     try {
                         sleepBeforeRetry(attempt);
-                    } catch (InterruptedException interruptedException) {
+                    }
+                    catch (InterruptedException interruptedException) {
                         Thread.currentThread().interrupt();
                         throw new TmdbResponseException(interruptedException);
                     }
@@ -69,7 +76,8 @@ public class TmdbHttpClient implements TmdbUrlReader {
                 }
 
                 break;
-            } catch (InterruptedException exception) {
+            }
+            catch (InterruptedException exception) {
                 Thread.currentThread().interrupt();
                 throw new TmdbResponseException(exception);
             }
@@ -87,8 +95,7 @@ public class TmdbHttpClient implements TmdbUrlReader {
 
         switch (requestType) {
             case GET -> requestBuilder.get();
-            case POST ->
-                    requestBuilder.post(RequestBody.create(jsonBody == null ? "" : jsonBody, JSON));
+            case POST -> requestBuilder.post(RequestBody.create(jsonBody == null ? "" : jsonBody, JSON));
             case DELETE -> requestBuilder.delete();
             default -> throw new RuntimeException("Invalid request type: " + requestType);
         }

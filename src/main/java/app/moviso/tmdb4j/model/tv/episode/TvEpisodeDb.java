@@ -2,12 +2,12 @@ package app.moviso.tmdb4j.model.tv.episode;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import app.moviso.tmdb4j.model.core.AccountStates;
 import app.moviso.tmdb4j.model.core.NamedIdElement;
 import app.moviso.tmdb4j.model.core.video.VideoResults;
 import app.moviso.tmdb4j.model.tv.core.Translations;
 import app.moviso.tmdb4j.model.tv.core.credits.Crew;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

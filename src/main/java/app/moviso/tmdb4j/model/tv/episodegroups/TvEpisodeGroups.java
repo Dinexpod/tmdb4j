@@ -2,9 +2,9 @@ package app.moviso.tmdb4j.model.tv.episodegroups;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import app.moviso.tmdb4j.model.core.NamedStringIdElement;
 import app.moviso.tmdb4j.model.tv.core.Network;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

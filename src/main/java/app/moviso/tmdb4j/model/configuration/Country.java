@@ -1,7 +1,7 @@
 package app.moviso.tmdb4j.model.configuration;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import app.moviso.tmdb4j.model.core.AbstractJsonMapping;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

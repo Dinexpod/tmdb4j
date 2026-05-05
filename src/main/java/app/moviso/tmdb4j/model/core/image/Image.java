@@ -1,7 +1,7 @@
 package app.moviso.tmdb4j.model.core.image;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import app.moviso.tmdb4j.model.core.StringIdElement;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

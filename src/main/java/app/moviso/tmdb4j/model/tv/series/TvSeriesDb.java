@@ -2,8 +2,6 @@ package app.moviso.tmdb4j.model.tv.series;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import app.moviso.tmdb4j.model.core.AccountStates;
 import app.moviso.tmdb4j.model.core.Genre;
 import app.moviso.tmdb4j.model.core.Language;
@@ -21,6 +19,8 @@ import app.moviso.tmdb4j.model.tv.core.TvEpisode;
 import app.moviso.tmdb4j.model.tv.core.TvSeason;
 import app.moviso.tmdb4j.model.tv.core.credits.AggregateCredits;
 import app.moviso.tmdb4j.model.tv.core.credits.Credits;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

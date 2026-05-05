@@ -1,8 +1,8 @@
 package app.moviso.tmdb4j.model.core.video;
 
+import app.moviso.tmdb4j.model.core.NamedStringIdElement;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import app.moviso.tmdb4j.model.core.NamedStringIdElement;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

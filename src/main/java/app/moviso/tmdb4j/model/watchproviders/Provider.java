@@ -2,8 +2,8 @@ package app.moviso.tmdb4j.model.watchproviders;
 
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import app.moviso.tmdb4j.model.core.AbstractJsonMapping;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

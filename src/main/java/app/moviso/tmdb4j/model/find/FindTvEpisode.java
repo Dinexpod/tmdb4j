@@ -1,7 +1,7 @@
 package app.moviso.tmdb4j.model.find;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import app.moviso.tmdb4j.model.tv.core.TvEpisode;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

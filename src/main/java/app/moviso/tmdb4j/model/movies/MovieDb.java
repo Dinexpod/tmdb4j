@@ -2,8 +2,6 @@ package app.moviso.tmdb4j.model.movies;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import app.moviso.tmdb4j.model.core.AccountStates;
 import app.moviso.tmdb4j.model.core.Genre;
 import app.moviso.tmdb4j.model.core.IdElement;
@@ -15,6 +13,8 @@ import app.moviso.tmdb4j.model.core.ReviewResultsPage;
 import app.moviso.tmdb4j.model.core.video.VideoResults;
 import app.moviso.tmdb4j.model.core.watchproviders.ProviderResults;
 import app.moviso.tmdb4j.model.movies.changes.ChangeResults;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
