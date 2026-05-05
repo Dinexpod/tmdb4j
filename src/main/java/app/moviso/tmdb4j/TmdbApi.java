@@ -64,6 +64,10 @@ public class TmdbApi {
         return new TmdbConfiguration(this);
     }
 
+    public TmdbCredits getCredits() {
+        return new TmdbCredits(this);
+    }
+
     public TmdbDiscover getDiscover() {
         return new TmdbDiscover(this);
     }

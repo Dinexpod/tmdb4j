@@ -5,7 +5,7 @@ module app.moviso.tmdb4j {
     requires com.fasterxml.jackson.annotation;
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
-    requires java.net.http;
+    requires okhttp3;
     requires jdk.crypto.cryptoki;
 
     opens app.moviso.tmdb4j.model.account to com.fasterxml.jackson.databind;
@@ -16,6 +16,7 @@ module app.moviso.tmdb4j {
     opens app.moviso.tmdb4j.model.companies to com.fasterxml.jackson.databind;
     opens app.moviso.tmdb4j.model.configuration to com.fasterxml.jackson.databind;
     opens app.moviso.tmdb4j.model.core to com.fasterxml.jackson.databind;
+    opens app.moviso.tmdb4j.model.credits to com.fasterxml.jackson.databind;
     opens app.moviso.tmdb4j.model.core.image to com.fasterxml.jackson.databind;
     opens app.moviso.tmdb4j.model.core.multi to com.fasterxml.jackson.databind;
     opens app.moviso.tmdb4j.model.core.popularperson to com.fasterxml.jackson.databind;
@@ -51,6 +52,7 @@ module app.moviso.tmdb4j {
     exports app.moviso.tmdb4j.model.companies;
     exports app.moviso.tmdb4j.model.configuration;
     exports app.moviso.tmdb4j.model.core;
+    exports app.moviso.tmdb4j.model.credits;
     exports app.moviso.tmdb4j.model.core.image;
     exports app.moviso.tmdb4j.model.core.multi;
     exports app.moviso.tmdb4j.model.core.popularperson;

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import static app.moviso.tmdb4j.TmdbReviews.TMDB_METHOD_MOVIE_REVIEW;
 import static app.moviso.tmdb4j.testutil.TestUtils.validateAbstractJsonMappingFields;
 import static app.moviso.tmdb4j.tools.ApiUrl.TMDB_API_BASE_URL;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
@@ -36,6 +37,23 @@ public class TmdbReviewsTest extends AbstractTmdbApiTest<TmdbReviews> {
 
         Review review = getApiToTest().getDetails(reviewId);
         assertNotNull(review);
+        validateAbstractJsonMappingFields(review);
+    }
+
+    /**
+     * Test {@link TmdbReviews#getDetails(String)} with an expected result.
+     */
+    @Test
+    public void testGetDetailsByStringId() throws IOException, TmdbException {
+        String reviewId = "640b2aeecaaca20079decdcc";
+
+        String body = TestUtils.readTestFile("api_responses/reviews/details.json");
+        String url = TMDB_API_BASE_URL + TMDB_METHOD_MOVIE_REVIEW + "/" + reviewId;
+        when(getTmdbUrlReader().readUrl(url, null, RequestType.GET)).thenReturn(body);
+
+        Review review = getApiToTest().getDetails(reviewId);
+        assertNotNull(review);
+        assertEquals(reviewId, review.getId());
         validateAbstractJsonMappingFields(review);
     }
 }

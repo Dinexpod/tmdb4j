@@ -1,8 +1,5 @@
 package app.moviso.tmdb4j;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectReader;
 import app.moviso.tmdb4j.model.core.responses.ResponseStatus;
 import app.moviso.tmdb4j.model.core.responses.TmdbResponseException;
 import app.moviso.tmdb4j.tools.ApiUrl;
@@ -10,6 +7,9 @@ import app.moviso.tmdb4j.tools.RequestType;
 import app.moviso.tmdb4j.tools.TmdbException;
 import app.moviso.tmdb4j.tools.TmdbResponseCode;
 import app.moviso.tmdb4j.util.JsonUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +40,7 @@ public abstract class AbstractTmdbApi {
     }
 
     /**
-     * Maps a json result to a class.
+     * Maps a JSON result to a class.
      *
      * @param apiUrl the api url to map
      * @param clazz  the class to map to
@@ -52,7 +52,7 @@ public abstract class AbstractTmdbApi {
     }
 
     /**
-     * Maps a json result to a class.
+     * Maps a JSON result to a class.
      *
      * @param apiUrl      the api url to map
      * @param resultClass the class to map to
@@ -64,10 +64,10 @@ public abstract class AbstractTmdbApi {
     }
 
     /**
-     * Maps a json result to a class.
+     * Maps a JSON result to a class.
      *
      * @param apiUrl   the api url to map
-     * @param jsonBody the json body
+     * @param jsonBody the JSON body
      * @param clazz    the class to map to
      * @param <T>      the type of class to map to
      * @return the mapped class.
@@ -77,10 +77,10 @@ public abstract class AbstractTmdbApi {
     }
 
     /**
-     * Maps a json result to a class.
+     * Maps a JSON result to a class.
      *
      * @param apiUrl      the api url to map
-     * @param jsonBody    the json body
+     * @param jsonBody    the JSON body
      * @param resultClass the class to map to
      * @param <T>         the type of class to map to
      * @return the mapped class
@@ -90,10 +90,10 @@ public abstract class AbstractTmdbApi {
     }
 
     /**
-     * Maps a json result to a class.
+     * Maps a JSON result to a class.
      *
      * @param apiUrl      the api url to map
-     * @param jsonBody    the json body
+     * @param jsonBody    the JSON body
      * @param requestType the type of request
      * @param clazz       the class to map to
      * @param <T>         the type of class to map to
@@ -104,32 +104,35 @@ public abstract class AbstractTmdbApi {
     }
 
     /**
-     * Maps a json result to a class.
+     * Maps a JSON result to a class.
      *
      * @param apiUrl      the api url to map
-     * @param jsonBody    the json body
+     * @param jsonBody    the JSON body
      * @param requestType the type of request
      * @param resultClass the class to map to
      * @param <T>         the type of class to map to
      * @return the mapped class.
      */
     protected <T> T mapJsonResult(ApiUrl apiUrl, String jsonBody, RequestType requestType, TypeReference<T> resultClass)
-        throws TmdbException {
+            throws TmdbException {
         return mapJsonResult(apiUrl, jsonBody, requestType, JsonUtil.OBJECT_MAPPER.readerFor(resultClass));
     }
 
     /**
-     * Maps a json result to a class.
+     * Maps a JSON result to a class.
      *
      * @param apiUrl       the api url to map
-     * @param jsonBody     the json body
+     * @param jsonBody     the JSON body
      * @param requestType  the type of request
      * @param objectReader the object reader
      * @param <T>          the type of class to map to
      * @return the mapped class.
      */
     private <T> T mapJsonResult(ApiUrl apiUrl, String jsonBody, RequestType requestType, ObjectReader objectReader) throws TmdbException {
-        String jsonResponse = tmdbApi.getTmdbUrlReader().readUrl(apiUrl.buildUrl(), jsonBody, requestType);
+        String jsonResponse = tmdbApi.getTmdbUrlReader()
+                .readUrl(apiUrl.buildUrl(), jsonBody, requestType);
+
+        validateJsonResponse(jsonResponse);
 
         try {
             // check if the response was successful. tmdb have their own codes for successful and unsuccessful responses.
@@ -150,9 +153,10 @@ public abstract class AbstractTmdbApi {
         }
         catch (JsonProcessingException exception) {
             // ignore, not an error - caused by RESPONSE_STATUS_READER.readValue(jsonResponse);
-            // this is necessary because if some requests fail (including 2xx responses), the response is a json object
+            // this is necessary because if some requests fail (including 2xx responses), the response is a JSON object
         }
         catch (InterruptedException exception) {
+            Thread.currentThread().interrupt();
             throw new TmdbException(exception);
         }
 
@@ -162,5 +166,27 @@ public abstract class AbstractTmdbApi {
         catch (JsonProcessingException exception) {
             throw new TmdbException(exception);
         }
+    }
+
+    private void validateJsonResponse(String jsonResponse) throws TmdbResponseException {
+        if (jsonResponse == null || jsonResponse.isBlank()) {
+            throw new TmdbResponseException("TMDB returned empty response");
+        }
+
+        String trimmed = jsonResponse.trim();
+        if (trimmed.startsWith("{") || trimmed.startsWith("[")) {
+            return;
+        }
+
+        throw new TmdbResponseException("TMDB returned non-JSON response. Body preview=" + preview(trimmed));
+    }
+
+    private String preview(String responseBody) {
+        String oneLineBody = responseBody.replaceAll("\\s+", " ").trim();
+        if (oneLineBody.length() <= 500) {
+            return oneLineBody;
+        }
+
+        return oneLineBody.substring(0, 500);
     }
 }

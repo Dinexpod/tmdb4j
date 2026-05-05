@@ -9,6 +9,7 @@ import app.moviso.tmdb4j.model.core.AccountStates;
 import app.moviso.tmdb4j.model.core.MovieResultsPage;
 import app.moviso.tmdb4j.model.core.ReviewResultsPage;
 import app.moviso.tmdb4j.model.core.responses.ResponseStatus;
+import app.moviso.tmdb4j.model.core.responses.TmdbResponseException;
 import app.moviso.tmdb4j.model.core.video.VideoResults;
 import app.moviso.tmdb4j.model.core.watchproviders.ProviderResults;
 import app.moviso.tmdb4j.model.movies.AlternativeTitles;
@@ -35,6 +36,7 @@ import static app.moviso.tmdb4j.testutil.TestUtils.validateAbstractJsonMappingFi
 import static app.moviso.tmdb4j.tools.ApiUrl.TMDB_API_BASE_URL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.mockito.Mockito.when;
 
 /**
@@ -380,5 +382,17 @@ public class TmdbMoviesTest extends AbstractTmdbApiTest<TmdbMovies> {
         assertNotNull(responseStatus);
         validateAbstractJsonMappingFields(responseStatus);
         assertEquals(TmdbResponseCode.ITEM_DELETED, responseStatus.getStatusCode());
+    }
+
+    /**
+     * Tests that non-JSON responses are rejected before Jackson attempts to map them.
+     */
+    @Test
+    public void testNonJsonResponseThrowsTmdbResponseException() throws TmdbException {
+        String url = TMDB_API_BASE_URL + TMDB_METHOD_MOVIE + "/123?language=en-US";
+        when(getTmdbUrlReader().readUrl(url, null, RequestType.GET)).thenReturn("<html>Bad Gateway</html>");
+
+        TmdbResponseException exception = assertThrowsExactly(TmdbResponseException.class, () -> getApiToTest().getDetails(123, "en-US"));
+        assertEquals("TMDB returned non-JSON response. Body preview=<html>Bad Gateway</html>", exception.getMessage());
     }
 }

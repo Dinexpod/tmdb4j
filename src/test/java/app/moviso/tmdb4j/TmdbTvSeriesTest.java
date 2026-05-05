@@ -386,6 +386,20 @@ public class TmdbTvSeriesTest extends AbstractTmdbApiTest<TmdbTvSeries> {
     }
 
     /**
+     * Test for {@link TmdbTvSeries#getVideos(int, String, String...)} with include video language.
+     */
+    @Test
+    public void testGetVideosWithIncludeVideoLanguage() throws IOException, TmdbException {
+        String body = TestUtils.readTestFile("api_responses/tv_series/videos.json");
+        String url = TMDB_API_BASE_URL + TMDB_METHOD_TV + "/123/videos?language=en-US&include_video_language=en%2Cuk";
+        when(getTmdbUrlReader().readUrl(url, null, RequestType.GET)).thenReturn(body);
+
+        VideoResults videos = getApiToTest().getVideos(123, "en-US", "en", "uk");
+        assertNotNull(videos);
+        validateAbstractJsonMappingFields(videos);
+    }
+
+    /**
      * Test for {@link TmdbTvSeries#getWatchProviders(int)} with an expected result.
      */
     @Test

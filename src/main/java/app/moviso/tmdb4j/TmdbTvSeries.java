@@ -324,7 +324,7 @@ public class TmdbTvSeries extends AbstractTmdbApi {
     public VideoResults getVideos(int seriesId, String language, String... includeVideoLanguage) throws TmdbException {
         ApiUrl apiUrl = new ApiUrl(TMDB_METHOD_TV, seriesId, "videos")
             .addLanguage(language)
-            .addQueryParamCommandSeparated("include_image_language", includeVideoLanguage);
+            .addQueryParamCommandSeparated("include_video_language", includeVideoLanguage);
         return mapJsonResult(apiUrl, VideoResults.class);
     }
 

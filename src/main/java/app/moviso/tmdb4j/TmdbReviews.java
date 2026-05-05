@@ -9,7 +9,7 @@ import app.moviso.tmdb4j.tools.TmdbException;
  * <a href="https://developer.themoviedb.org/reference/review-details">documentation</a> for more info.
  */
 public class TmdbReviews extends AbstractTmdbApi {
-    protected static final String TMDB_METHOD_MOVIE_REVIEW = "reviews";
+    protected static final String TMDB_METHOD_MOVIE_REVIEW = "review";
 
     /**
      * Create a new TmdbReviews instance to call the reviews related TMDb API methods.
@@ -26,6 +26,17 @@ public class TmdbReviews extends AbstractTmdbApi {
      * @return the reviews
      */
     public Review getDetails(int reviewId) throws TmdbException {
+        return getDetails(String.valueOf(reviewId));
+    }
+
+    /**
+     * <p>Get the details for a review.</p>
+     * <p>See the <a href="https://developer.themoviedb.org/reference/review-details">documentation</a> for more info.</p>
+     *
+     * @param reviewId The review id.
+     * @return the reviews
+     */
+    public Review getDetails(String reviewId) throws TmdbException {
         ApiUrl apiUrl = new ApiUrl(TMDB_METHOD_MOVIE_REVIEW, reviewId);
         return mapJsonResult(apiUrl, Review.class);
     }

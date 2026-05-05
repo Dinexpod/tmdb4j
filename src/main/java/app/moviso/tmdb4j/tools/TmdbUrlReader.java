@@ -10,7 +10,7 @@ public interface TmdbUrlReader {
      * Reads a url and returns the response.
      *
      * @param url         the url to make the request to
-     * @param jsonBody    the json body to send with the request
+     * @param jsonBody    the JSON body to send with the request
      * @param requestType the type of request to make
      * @return the response from the movie database api
      * @throws TmdbResponseException if the response was not successful

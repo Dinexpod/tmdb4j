@@ -37,6 +37,9 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-core")
     implementation("com.fasterxml.jackson.core:jackson-databind")
 
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:5.3.0"))
+    implementation("com.squareup.okhttp3:okhttp")
+
     implementation("org.apache.commons:commons-lang3:3.20.0")
     testImplementation("commons-io:commons-io:2.21.0")
 }
