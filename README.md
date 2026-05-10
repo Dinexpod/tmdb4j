@@ -17,6 +17,25 @@ It's available via [Maven Central](https://central.sonatype.com/artifact/io.gith
 Just add it as dependency to your
 project.
 
+It's available via [Maven Central](https://central.sonatype.com/artifact/io.github.dinexpod/tmdb4j). Just add it as dependency to your project.
+
+## Why this fork exists
+
+This project started from `c-eg/themoviedbapi`, but has been significantly updated and maintained for Moviso production needs.
+
+Key changes include:
+- New package name and Maven coordinates: `io.github.dinexpod:tmdb4j`
+- Updated API structure under `app.moviso.tmdb4j`
+- Extended TMDb API coverage
+- Improved exception handling
+- Android-friendly ProGuard / R8 rules
+- Maven Central publishing
+- Ongoing updates for Moviso movie and TV data integrations
+
+## Installation
+
+### Gradle (Kotlin)
+
 <details open>
 <summary>Gradle (Kotlin)</summary>
 
@@ -161,9 +180,9 @@ No additional configuration is required for most Android projects.
 
 ## Notes & Acknowledgements
 
-The library was developed for [Moviso](https://moviso.app) to interact with TMDb services.
-This library has been inspired by [themoviedbapi](https://github.com/c-eg/themoviedbapi) but
-has been rewritten to provide a cleaner API, and to expose more features of the TMDb JSON API.
+This library was developed for [Moviso](https://moviso.app) to interact with TMDb services.
+
+Inspired by [themoviedbapi](https://github.com/c-eg/themoviedbapi).
 
 ## Versioning
 
