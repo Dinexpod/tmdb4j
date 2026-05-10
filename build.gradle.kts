@@ -102,9 +102,9 @@ publishing {
                 developers {
                     developer {
                         id = "dinexpod"
-                        name = "Levitskyi Anatolii"
-                        email = "dinexpod@gmail.com"
-                        url = "https://github.com/dinexpod"
+                        name = "Anatolii Levitskyi"
+                        email = "support@moviso.app"
+                        url = "https://github.com/Dinexpod"
                     }
                 }
             }
