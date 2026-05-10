@@ -180,9 +180,9 @@ No additional configuration is required for most Android projects.
 
 ## Notes & Acknowledgements
 
-The library was developed for [Moviso](https://moviso.app) to interact with TMDb services.
-This library has been inspired by [themoviedbapi](https://github.com/c-eg/themoviedbapi) but
-has been rewritten to provide a cleaner API, and to expose more features of the TMDb JSON API.
+This library was developed for [Moviso](https://moviso.app) to interact with TMDb services.
+
+Inspired by [themoviedbapi](https://github.com/c-eg/themoviedbapi).
 
 ## Versioning
 
