@@ -7,11 +7,11 @@ import app.moviso.tmdb4j.tools.RequestType;
 import app.moviso.tmdb4j.tools.TmdbException;
 import app.moviso.tmdb4j.tools.TmdbResponseCode;
 import app.moviso.tmdb4j.util.JsonUtil;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.ObjectReader;
 
 import static app.moviso.tmdb4j.tools.TmdbResponseCode.REQUEST_LIMIT_EXCEEDED;
 
@@ -151,7 +151,7 @@ public abstract class AbstractTmdbApi {
                 }
             }
         }
-        catch (JsonProcessingException exception) {
+        catch (JacksonException exception) {
             // ignore, not an error - caused by RESPONSE_STATUS_READER.readValue(jsonResponse);
             // this is necessary because if some requests fail (including 2xx responses), the response is a JSON object
         }
@@ -163,7 +163,7 @@ public abstract class AbstractTmdbApi {
         try {
             return objectReader.readValue(jsonResponse);
         }
-        catch (JsonProcessingException exception) {
+        catch (JacksonException exception) {
             throw new TmdbException(exception);
         }
     }

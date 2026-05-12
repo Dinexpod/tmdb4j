@@ -9,7 +9,7 @@ import app.moviso.tmdb4j.model.configuration.Timezone;
 import app.moviso.tmdb4j.model.core.Language;
 import app.moviso.tmdb4j.tools.ApiUrl;
 import app.moviso.tmdb4j.tools.TmdbException;
-import com.fasterxml.jackson.core.type.TypeReference;
+import tools.jackson.core.type.TypeReference;
 
 /**
  * The movie database api for configuration. See the

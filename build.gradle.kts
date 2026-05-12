@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "io.github.dinexpod"
-version = "1.2.0"
+version = "2.0.0"
 
 repositories {
     mavenCentral()
@@ -34,10 +34,10 @@ dependencies {
     testCompileOnly(lombok)
     testAnnotationProcessor(lombok)
 
-    implementation(platform("com.fasterxml.jackson:jackson-bom:2.21.3"))
+    implementation(platform("tools.jackson:jackson-bom:3.1.3"))
     implementation("com.fasterxml.jackson.core:jackson-annotations")
-    implementation("com.fasterxml.jackson.core:jackson-core")
-    implementation("com.fasterxml.jackson.core:jackson-databind")
+    implementation("tools.jackson.core:jackson-core")
+    implementation("tools.jackson.core:jackson-databind")
 
     implementation(platform("com.squareup.okhttp3:okhttp-bom:5.3.2"))
     implementation("com.squareup.okhttp3:okhttp")
