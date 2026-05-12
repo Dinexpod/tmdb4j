@@ -3,45 +3,47 @@ plugins {
     checkstyle
     `maven-publish`
     signing
-    id("com.gradleup.nmcp") version "0.0.9"
+    id("com.gradleup.nmcp") version "1.4.4"
 }
 
 group = "io.github.dinexpod"
-version = "1.1.1"
+version = "1.2.0"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    val lombok = "org.projectlombok:lombok:1.18.46"
+
     // logging
-    implementation(platform("org.slf4j:slf4j-bom:2.0.17"))
+    implementation(platform("org.slf4j:slf4j-bom:2.0.18"))
     implementation("org.slf4j:slf4j-api")
 
     // testing
-    testImplementation(platform("org.junit:junit-bom:5.13.4"))
+    testImplementation(platform("org.junit:junit-bom:6.0.3"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")  // gradle bundled version is incompatible with 5.12
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
-    testImplementation(platform("org.mockito:mockito-bom:5.21.0"))
+    testImplementation(platform("org.mockito:mockito-bom:5.23.0"))
     testImplementation("org.mockito:mockito-core")
 
     // util
-    compileOnly("org.projectlombok:lombok:1.18.42")
-    annotationProcessor("org.projectlombok:lombok:1.18.42")
-    testCompileOnly("org.projectlombok:lombok:1.18.42")
-    testAnnotationProcessor("org.projectlombok:lombok:1.18.42")
+    compileOnly(lombok)
+    annotationProcessor(lombok)
+    testCompileOnly(lombok)
+    testAnnotationProcessor(lombok)
 
     implementation(platform("com.fasterxml.jackson:jackson-bom:2.21.3"))
     implementation("com.fasterxml.jackson.core:jackson-annotations")
     implementation("com.fasterxml.jackson.core:jackson-core")
     implementation("com.fasterxml.jackson.core:jackson-databind")
 
-    implementation(platform("com.squareup.okhttp3:okhttp-bom:5.3.0"))
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:5.3.2"))
     implementation("com.squareup.okhttp3:okhttp")
 
     implementation("org.apache.commons:commons-lang3:3.20.0")
-    testImplementation("commons-io:commons-io:2.21.0")
+    testImplementation("commons-io:commons-io:2.22.0")
 }
 
 java {
@@ -58,7 +60,7 @@ tasks.test {
 }
 
 checkstyle {
-    toolVersion = "10.17.0"
+    toolVersion = "13.4.2"
     configFile = file("config/checkstyle/checkstyle.xml")
 }
 tasks.checkstyleMain {
@@ -113,11 +115,16 @@ publishing {
 }
 
 nmcp {
-    publish("mavenJava") {
-        username.set(System.getenv("SONATYPE_USERNAME") ?: project.findProperty("SONATYPE_USERNAME") as String?)
-        password.set(System.getenv("SONATYPE_PASSWORD") ?: project.findProperty("SONATYPE_PASSWORD") as String?)
-
-        publicationType = "USER_MANAGED"
+    publishAllPublicationsToCentralPortal {
+        username.set(
+            providers.environmentVariable("SONATYPE_USERNAME")
+                .orElse(providers.gradleProperty("SONATYPE_USERNAME"))
+        )
+        password.set(
+            providers.environmentVariable("SONATYPE_PASSWORD")
+                .orElse(providers.gradleProperty("SONATYPE_PASSWORD"))
+        )
+        publishingType.set("USER_MANAGED")
     }
 }
 
