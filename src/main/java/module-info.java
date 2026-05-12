@@ -2,9 +2,9 @@ module app.moviso.tmdb4j {
     requires static lombok;
     requires org.slf4j;
     requires org.apache.commons.lang3;
-    requires com.fasterxml.jackson.annotation;
-    requires tools.jackson.core;
-    requires tools.jackson.databind;
+    requires transitive com.fasterxml.jackson.annotation;
+    requires transitive tools.jackson.core;
+    requires transitive tools.jackson.databind;
     requires okhttp3;
     requires jdk.crypto.cryptoki;
 
