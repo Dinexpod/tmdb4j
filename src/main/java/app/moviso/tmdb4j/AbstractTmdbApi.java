@@ -142,8 +142,8 @@ public abstract class AbstractTmdbApi {
 
             if (tmdbResponseCode != null) {
                 if (REQUEST_LIMIT_EXCEEDED == tmdbResponseCode) {
-                    LOGGER.info("TMDB API: Request limit exceeded. Waiting 1 second before retrying.");
-                    Thread.sleep(1000);
+                    LOGGER.info("TMDB API: Request limit exceeded. Waiting 5 second before retrying.");
+                    Thread.sleep(5000);
                     return mapJsonResult(apiUrl, jsonBody, requestType, objectReader);
                 }
                 else if (!tmdbResponseCode.isSuccess()) {
