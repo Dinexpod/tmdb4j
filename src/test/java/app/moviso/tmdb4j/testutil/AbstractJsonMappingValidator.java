@@ -64,7 +64,12 @@ public class AbstractJsonMappingValidator {
      */
     public void validateNullFields(List<String> fieldsToIgnore) {
         nullFields.removeAll(fieldsToIgnore);
+        nullFields.removeIf(this::isOptionalNullField);
         assertTrue(nullFields.isEmpty(), "Null fields found: " + nullFields);
+    }
+
+    private boolean isOptionalNullField(String fieldName) {
+        return fieldName.endsWith(".freeProviders") || fieldName.endsWith(".adsProviders");
     }
 
     /**

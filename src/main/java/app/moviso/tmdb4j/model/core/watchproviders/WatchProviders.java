@@ -21,4 +21,10 @@ public class WatchProviders extends AbstractJsonMapping {
 
     @JsonProperty("flatrate")
     private List<Provider> flatrateProviders;
+
+    @JsonProperty("free")
+    private List<Provider> freeProviders;
+
+    @JsonProperty("ads")
+    private List<Provider> adsProviders;
 }
